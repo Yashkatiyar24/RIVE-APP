@@ -1,0 +1,4 @@
+Placeholder Rive file: replace this with the real `learning_buddy.riv` asset.
+This text file is included so bundling succeeds; the runtime animation
+requires the actual Rive binary exported with the “BuddyMachine” state
+machine and the inputs described in the README.

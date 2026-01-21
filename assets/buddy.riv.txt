@@ -1,0 +1,25 @@
+/*
+ * PLACEHOLDER FILE FOR RIVE ANIMATION
+ * 
+ * INSTRUCTIONS:
+ * 1. Replace this file with your actual buddy.riv animation file
+ * 2. The RIVE file should contain:
+ *    - State Machine: "MainStateMachine"
+ *    - Inputs (Numbers):
+ *      • mood: 0=idle, 1=happy, 2=sad, 3=focus, 4=excited
+ *      • progress: 0-100
+ *      • streakCount: number
+ *      • energy: 0.0-1.0
+ *    - Triggers:
+ *      • tap
+ *      • correct
+ *      • wrong
+ *      • levelUp
+ * 
+ * 3. After adding the file, run:
+ *    npx expo prebuild
+ *    npx expo run:android (or ios)
+ *    npx expo start --dev-client
+ */
+
+// This is a placeholder text file. Replace with actual buddy.riv binary file.

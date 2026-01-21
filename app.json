@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "RIVE Learning App",
+    "slug": "rive-learning-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#E8E4F3"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rivelearning.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E8E4F3"
+      },
+      "package": "com.rivelearning.app"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "scheme": "rivelearningapp",
+    "plugins": [
+      "expo-router",
+      "expo-asset",
+      "@rive-app/react-native/expo-plugin"
+    ]
+  }
+}
