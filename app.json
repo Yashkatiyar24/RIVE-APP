@@ -28,7 +28,24 @@
     "scheme": "rivelearningapp",
     "plugins": [
       "expo-router",
-      "expo-asset"
-    ]
+      "expo-asset",
+      "./plugins/withKotlinVersion.js",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e86ddba9-5d0c-4467-9b11-dc42ae2d8a82"
+      }
+    }
   }
 }
