@@ -28,8 +28,7 @@
     "scheme": "rivelearningapp",
     "plugins": [
       "expo-router",
-      "expo-asset",
-      "@rive-app/react-native/expo-plugin"
+      "expo-asset"
     ]
   }
 }

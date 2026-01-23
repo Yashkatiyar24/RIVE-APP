@@ -1,99 +1,108 @@
-# Rive Assets
+# Rive Animation Setup Guide
 
-This directory should contain the Rive animation files for the Learning Buddy character.
+This guide explains how to integrate your Rive animation files into the E-Craft Learning app.
 
-## Required File
+## Current Rive Files
 
-Place your Rive file here:
+| File | Purpose | Status |
+|------|---------|--------|
+| `assets/rive/learning_buddy.riv` | Main buddy character (hero, headers) | ⚠️ Placeholder (272 bytes) |
+| `assets/rive/owl.riv` | AI Assistant owl character | ⚠️ Empty (needs real file) |
+
+## How to Add Your Rive Files
+
+### Step 1: Export from Rive Editor
+
+1. Open your animation in [Rive Editor](https://rive.app)
+2. Click **Export** → **For Runtime**
+3. Ensure "Include all artboards and state machines" is checked
+4. Download the `.riv` file
+
+### Step 2: Place Files in Assets
+
+Copy your exported `.riv` files to:
 ```
-assets/rive/learning_buddy.riv
-```
-
-## State Machine Configuration
-
-The app expects a state machine named **"BuddyMachine"** with the following inputs:
-
-### Number Inputs
-
-| Input Name   | Type   | Range      | Description                     |
-|--------------|--------|------------|---------------------------------|
-| `mood`       | Number | 0-3        | 0=idle, 1=happy, 2=sad, 3=focused |
-| `progress`   | Number | 0-100      | Learning progress percentage    |
-| `streakCount`| Number | 0+         | Current learning streak count   |
-
-### Triggers
-
-| Trigger Name | Description                              |
-|--------------|------------------------------------------|
-| `celebrate`  | Play celebration animation (level up, enroll) |
-| `thinking`   | Play thinking/processing animation       |
-| `tap`        | Play tap/wave reaction animation         |
-| `wink`       | Play wink/fun interaction animation (optional) |
-
-## Mood States
-
-```javascript
-const moodMap = {
-  idle: 0,      // Default neutral state
-  happy: 1,     // Positive feedback, celebrations
-  sad: 2,       // Errors, wrong answers
-  focused: 3,   // Learning mode, processing
-};
+assets/rive/
+├── learning_buddy.riv   # For RiveBuddy component
+├── owl.riv              # For RiveAIOwl component  
+└── cat_professor.riv    # For RiveCatProfessor component (optional)
 ```
 
-## Usage in App
+### Step 3: Note Your State Machine Names
 
-The `LearningBuddy` component automatically:
-1. Sets mood based on screen context
-2. Updates progress from store
-3. Fires triggers on user interactions
+Check your Rive file's **State Machine name**. Common examples:
+- `State Machine 1` (Rive default)
+- `MainStateMachine`
+- Custom names like `BuddyMachine`, `OwlMachine`
 
-### Study Guide Screen
-- Small buddy in header
-- `focused` mood when Learning mode
-- `happy` mood when Practicing mode
-- `tap` trigger on grade selection
-- `celebrate` trigger on "Add" subject
+The components will try to auto-detect common names, but you can update them in the component files if needed.
 
-### Course Detail Screen  
-- Large buddy in hero area
-- `focused` mood on load
-- `celebrate` trigger on enroll
+### Step 4: Note Your Input/Trigger Names
 
-### AI Assistant Screen
-- Large buddy with owl theme
-- `focused` mood when AI thinking
-- `thinking` trigger on message send
-- `happy` mood when response received
-- `celebrate` trigger on response complete
+The components look for these inputs (case-insensitive):
 
-## Fallback Behavior
+**For RiveBuddy:**
+- `mood` (Number: 0=idle, 1=happy, 2=sad, 3=focused, 4=thinking, 5=excited)
+- `progress` (Number: 0-100)
+- `streakCount` (Number)
+- `isThinking` (Boolean)
+- `celebrate` (Trigger)
 
-If inputs or triggers don't exist in your .riv file, the component gracefully ignores them and logs a warning. This allows for incremental development of the animation.
+**For RiveAIOwl:**
+- `isThinking` / `thinking` (Boolean)
+- `mood` (Number)
+- `think` (Trigger)
+- `respond` / `reply` (Trigger)
+- `blink` (Trigger)
 
-## Creating Your Rive File
+**For RiveCatProfessor:**
+- `mood` (Number: 0=idle, 1=happy, 2=teaching, 3=excited)
+- `isTeaching` (Boolean)
+- `wave` (Trigger)
+- `explain` (Trigger)
+- `celebrate` (Trigger)
 
-1. Go to [rive.app](https://rive.app)
-2. Create a new file
-3. Design your character with multiple states
-4. Add a State Machine named "BuddyMachine"
-5. Configure inputs as listed above
-6. Export as .riv format
-7. Place in this directory as `learning_buddy.riv`
+## Testing on Native
 
-## Native Build Required
-
-Since rive-react-native requires native code:
+Rive animations **only work on iOS/Android** (not web). To test:
 
 ```bash
-# Install dev client
-npx expo install expo-dev-client
-
-# Prebuild native projects
-npx expo prebuild
-
-# Run on device/simulator
+# For iOS (requires Mac with Xcode)
 npx expo run:ios
-# or
+
+# For Android (requires Android Studio)
 npx expo run:android
 ```
+
+## Web Fallback
+
+On web, the app uses premium CSS-animated placeholder characters that mimic the Rive style:
+- Floating/bobbing animation
+- Expressive eyes with blinking
+- Mood-based colors
+- Particle effects on celebrations
+
+## Troubleshooting
+
+### "Rive file not found" on native
+- Ensure the file is in `assets/rive/`
+- Run `npx expo prebuild --clean` to regenerate native projects
+- Rebuild with `npx expo run:ios` or `npx expo run:android`
+
+### Animations not responding to inputs
+- Check your state machine name matches what the component expects
+- Verify input/trigger names in Rive Editor
+- Look at console logs for "[RiveBuddy]" or "[RiveAIOwl]" warnings
+
+### Empty or corrupted .riv file
+- Re-export from Rive Editor
+- Ensure the file is at least a few KB in size
+- Don't rename the file extension manually
+
+## Component Files Reference
+
+| Component | File | Rive Resource Name |
+|-----------|------|-------------------|
+| RiveBuddy | `components/RiveBuddy.tsx` | `learning_buddy` |
+| RiveAIOwl | `components/RiveAIOwl.tsx` | `owl` |
+| RiveCatProfessor | `components/RiveCatProfessor.tsx` | `cat_professor` |

@@ -95,7 +95,7 @@ export default function LauncherScreen() {
             />
           </View>
 
-          <Text style={styles.title}>RIVE Learning</Text>
+          <Text style={styles.title}>E-Craft Learning</Text>
           <Text style={styles.subtitle}>
             Interactive education with animated characters
           </Text>

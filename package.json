@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
-    "@rive-app/react-native": "^7.5.1",
+    "@rive-app/react-canvas": "^4.26.1",
     "expo": "~52.0.0",
     "expo-asset": "~11.0.5",
     "expo-dev-client": "~5.0.0",
@@ -25,6 +25,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
+    "rive-react-native": "^9.8.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
